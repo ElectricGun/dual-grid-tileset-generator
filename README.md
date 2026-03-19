@@ -7,5 +7,5 @@ Generates a 15-tile dual-grid tilesystem tileset using a 1x5 template
 The image must have the same format as the template image
 
 For reference, see these videos: 
-- https://youtu.be/aWcCNGen0cM
-- https://www.youtube.com/watch?v=jEWFSv3ivTg
+- https://youtu.be/aWcCNGen0cM by Nonsensical 2D
+- https://www.youtube.com/watch?v=jEWFSv3ivTg by jess::codes
