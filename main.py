@@ -17,6 +17,7 @@ if __name__ == "__main__":
     
     filepath = args.filepath
     filename = os.path.basename(filepath)
+    filename_name, filename_ext = os.path.splitext(filename)
     base = Image.open(filepath)
     parent = os.path.dirname(filepath)
 
@@ -41,4 +42,5 @@ if __name__ == "__main__":
             sub_image = sub_image.rotate(-90 * j)
             img.paste(sub_image, (start_left, start_top))
 
-    img.save(os.path.join(parent, "result" + filename))
+    output_name = filename_name + "-15" + filename_ext
+    img.save(os.path.join(parent, output_name))
