@@ -16,4 +16,4 @@ For reference, see these videos:
 - https://youtu.be/aWcCNGen0cM by Nonsensical 2D
 - https://www.youtube.com/watch?v=jEWFSv3ivTg by jess::codes
 
-I made this script for my own game which uses 16x16 tiles. Therefore, the script does not by default support tile sizes other than 16x16, but the it is easy enough to configure by changing a variable value in the code.
+I made this script for my own game which uses 16x16 tiles. Therefore, the script does not by default support tile sizes other than 16x16, but it is easy enough to configure by changing a variable value in the code.
