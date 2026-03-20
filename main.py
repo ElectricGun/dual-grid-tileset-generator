@@ -13,34 +13,44 @@ size_y = tile_size * 5
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generates a 15-tile dual-grid autotile tileset using a 5-tile template")
     parser.add_argument("filepath", help="Path to the input file")
+    parser.add_argument("--alts", type=int, default=0)
     args = parser.parse_args()
     
     filepath = args.filepath
+    tilesets_amount = args.alts + 1
+
     filename = os.path.basename(filepath)
     filename_name, filename_ext = os.path.splitext(filename)
     base = Image.open(filepath)
     parent = os.path.dirname(filepath)
 
-    img = Image.new("RGBA", (size_x, size_y), (0, 0, 0, 0))
+    img = Image.new("RGBA", (size_x * tilesets_amount, size_y), (0, 0, 0, 0))
 
-    for i in range(0, 5):
+    for r in range(0, tilesets_amount):
+        repeat_x_paste_offset = size_x * r
+        repeat_x_base_offset = tile_size * r
 
-        amount = 4
-        if i == full_tile_index:
-            amount = 1
-        elif i == dual_corners_tile_index:
-            amount = 2
+        for i in range(0, 5):
 
-        for j in range(0, amount):
-            start_left = tile_size * j
-            start_top = tile_size * i
-            end_right = start_left + tile_size
-            end_bottom = start_top + tile_size
+            amount = 4
+            if i == full_tile_index:
+                amount = 1
+            elif i == dual_corners_tile_index:
+                amount = 2
 
-            box = (0, start_top, tile_size, end_bottom)
-            sub_image = base.crop(box)
-            sub_image = sub_image.rotate(-90 * j)
-            img.paste(sub_image, (start_left, start_top))
+            for j in range(0, amount):
+                start_left = tile_size * j
+                start_top = tile_size * i
+
+                box = (
+                    repeat_x_base_offset, 
+                    start_top, 
+                    tile_size + repeat_x_base_offset, 
+                    start_top + tile_size
+                    )
+                sub_image = base.crop(box)
+                sub_image = sub_image.rotate(-90 * j)
+                img.paste(sub_image, (start_left + repeat_x_paste_offset, start_top))
 
     output_name = filename_name + "-15" + filename_ext
     img.save(os.path.join(parent, output_name))
